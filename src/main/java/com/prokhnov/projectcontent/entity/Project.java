@@ -1,10 +1,7 @@
 package com.prokhnov.projectcontent.entity;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
-import java.util.Objects;
 
 @Entity
 @Table(name = "project")
