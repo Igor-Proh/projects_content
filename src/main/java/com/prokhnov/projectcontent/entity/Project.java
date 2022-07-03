@@ -1,5 +1,7 @@
 package com.prokhnov.projectcontent.entity;
 
+import com.sun.istack.NotNull;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -12,6 +14,7 @@ public class Project {
     @Column(name = "project_id")
     private long projectId;
 
+    @NotNull
     @Column(name = "project_name")
     private String projectName;
 

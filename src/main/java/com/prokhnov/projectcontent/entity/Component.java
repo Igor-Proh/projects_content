@@ -10,19 +10,19 @@ public class Component {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "componentId")
+    @Column(name = "component_id")
     private long componentId;
 
-    @Column(name = "componentName")
+    @Column(name = "component_name")
     private String componentName;
 
-    @Column(name = "componentQuantity")
+    @Column(name = "component_quantity")
     private int componentQuantity;
 
-    @Column(name = "componentDescription")
+    @Column(name = "component_description")
     private String componentDescription;
 
-    @Column(name = "componentDateOfCreate")
+    @Column(name = "component_date_of_create")
     private Date componentDateOfCreate;
 
     public Component() {
