@@ -20,15 +20,18 @@
             <th>Date</th>
             <th>Operations</th>
         </tr>
-        <c:forEach items="${projects}" var="project">
+<%--        <jsp:useBean id="projects" scope="request" type="java.util.List"/>--%>
 
-<%--            <c:url var="updateButton" value="/updateInfo">--%>
-<%--                <c:param name="empId" value="${emp.id}"/>--%>
-<%--            </c:url>--%>
-<%----%>
-<%--            <c:url var="deleteButton" value="/deleteEmployee">--%>
-<%--                <c:param name="empId" value="${emp.id}"/>--%>
-<%--            </c:url>--%>
+        <c:forEach var="project" items="${projects}" >
+
+
+            <c:url var="updateButton" value="/project/updateProject">
+                <c:param name="projectId" value="${project.projectId}"/>
+            </c:url>
+
+            <c:url var="deleteButton" value="/project/deleteProject">
+                <c:param name="projectId" value="${project.projectId}"/>
+            </c:url>
 
 
             <tr>
@@ -48,7 +51,7 @@
 </div>
 <br>
 <input type="button" value="Add New Project"
-       onclick="window.location.href = '/com_spring_mvc_hb_aop/addNewEmployee'"/>
+       onclick="window.location.href = '/project/addProject'"/>
 <br>
 <br>
 

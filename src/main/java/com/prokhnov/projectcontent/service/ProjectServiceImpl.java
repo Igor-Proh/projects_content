@@ -9,7 +9,6 @@ import java.util.List;
 
 @Service
 public class ProjectServiceImpl implements ProjectService {
-
     private ProjectDAO projectDAO;
 
     public ProjectServiceImpl() {
@@ -17,7 +16,6 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Autowired
     public ProjectServiceImpl(ProjectDAO projectDAO) {
-
         this.projectDAO = projectDAO;
     }
 
