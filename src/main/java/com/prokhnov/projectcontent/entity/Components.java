@@ -5,8 +5,8 @@ import java.util.Date;
 import java.util.Objects;
 
 @Entity
-@Table(name = "component")
-public class Component {
+@Table(name = "components")
+public class Components {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,10 +25,10 @@ public class Component {
     @Column(name = "component_date_of_create")
     private Date componentDateOfCreate;
 
-    public Component() {
+    public Components() {
     }
 
-    public Component(String componentName, int componentQuantity, String componentDescription, Date componentDateOfCreate) {
+    public Components(String componentName, int componentQuantity, String componentDescription, Date componentDateOfCreate) {
         this.componentName = componentName;
         this.componentQuantity = componentQuantity;
         this.componentDescription = componentDescription;
@@ -79,8 +79,8 @@ public class Component {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Component component = (Component) o;
-        return componentId == component.componentId && componentQuantity == component.componentQuantity && Objects.equals(componentName, component.componentName) && Objects.equals(componentDescription, component.componentDescription) && Objects.equals(componentDateOfCreate, component.componentDateOfCreate);
+        Components components = (Components) o;
+        return componentId == components.componentId && componentQuantity == components.componentQuantity && Objects.equals(componentName, components.componentName) && Objects.equals(componentDescription, components.componentDescription) && Objects.equals(componentDateOfCreate, components.componentDateOfCreate);
     }
 
     @Override

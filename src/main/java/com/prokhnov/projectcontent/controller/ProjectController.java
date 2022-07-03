@@ -1,12 +1,12 @@
 package com.prokhnov.projectcontent.controller;
 
+import com.prokhnov.projectcontent.entity.Components;
 import com.prokhnov.projectcontent.entity.Project;
 import com.prokhnov.projectcontent.service.ProjectServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.Date;
 import java.util.List;
 
@@ -19,6 +19,15 @@ public class ProjectController {
     @Autowired
     public ProjectController(ProjectServiceImpl projectServiceImpl) {
         this.projectServiceImpl = projectServiceImpl;
+    }
+
+    @RequestMapping({"/list/{id}","{id}"})
+    public String showComponents(Model model, @PathVariable String id){
+
+        int ids = Integer.parseInt(id);
+        List<Components> listOfProjectComponents = projectServiceImpl.getProjectById(ids).getProjectComponent();
+        model.addAttribute("components", listOfProjectComponents);
+        return "all-project-components-page";
     }
 
     @GetMapping(value = "/list")

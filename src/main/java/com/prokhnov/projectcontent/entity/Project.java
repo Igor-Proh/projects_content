@@ -4,6 +4,7 @@ import com.sun.istack.NotNull;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "project")
@@ -24,9 +25,9 @@ public class Project {
     @Column(name = "project_date_of_create")
     private Date projectDateOfCreate;
 
-//    @OneToMany(cascade = CascadeType.ALL)
-//    @JoinColumn(name = "project_id")
-//    private List<Component> projectComponent;
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "project_id")
+    private List<Components> projectComponent;
 
     public Project() {
     }
@@ -69,4 +70,11 @@ public class Project {
         this.projectDateOfCreate = projectDateOfCreate;
     }
 
+    public List<Components> getProjectComponent() {
+        return projectComponent;
+    }
+
+    public void setProjectComponent(List<Components> projectComponent) {
+        this.projectComponent = projectComponent;
+    }
 }

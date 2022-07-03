@@ -4,7 +4,7 @@
 <html>
 <head>
     <meta charset="UTF-8"/>
-    <title>Person List</title>
+    <title>Projects</title>
     <%--    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/style.css"/>--%>
 </head>
 <body>
@@ -12,7 +12,7 @@
 
 <br>
 <div>
-    <table border="1">
+    <table border="3">
         <tr>
             <th>Id</th>
             <th>Name</th>
@@ -20,9 +20,9 @@
             <th>Date</th>
             <th>Operations</th>
         </tr>
-<%--        <jsp:useBean id="projects" scope="request" type="java.util.List"/>--%>
 
-        <c:forEach var="project" items="${projects}" >
+        <jsp:useBean id="projects" scope="request" type="java.util.List"/>
+        <c:forEach var="project" items="${projects}">
 
 
             <c:url var="updateButton" value="/project/updateProject">
@@ -35,8 +35,8 @@
 
 
             <tr>
-                <td>${project.projectId} </td>
-                <td><a href="">${project.projectName}</a></td>
+                <td>${project.projectId}</td>
+                <td><a href="${project.projectId}">${project.projectName}</a></td>
                 <td>${project.projectDescription}</td>
                 <td>${project.projectDateOfCreate}</td>
                 <td>

@@ -2,7 +2,6 @@ package com.prokhnov.projectcontent.entity;
 
 import javax.persistence.*;
 import java.util.Objects;
-import java.util.Set;
 
 @Entity
 @Table(name = "user")
@@ -72,15 +71,16 @@ public class User {
     public void setUserEmail(String userEmail) {
         this.userEmail = userEmail;
     }
-/*
-    public Set<Role> getUserRole() {
-        return userRole;
-    }
 
-    public void setUserRole(Set<Role> userRole) {
-        this.userRole = userRole;
-    }
-*/
+    /*
+        public Set<Role> getUserRole() {
+            return userRole;
+        }
+
+        public void setUserRole(Set<Role> userRole) {
+            this.userRole = userRole;
+        }
+    */
     public boolean isUserIsActive() {
         return userIsActive;
     }
