@@ -1,26 +1,27 @@
 package com.prokhnov.projectcontent.controller;
 
-import com.prokhnov.projectcontent.entity.Components;
-import com.prokhnov.projectcontent.service.ProjectServiceImpl;
+import com.prokhnov.projectcontent.service.ComponentsServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import java.util.List;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping(value = "components")
 public class ComponentController {
 
-    private ProjectServiceImpl projectServiceImpl;
+    private final ComponentsServiceImpl componentsServiceImpl;
 
-    @RequestMapping(value = "/list/{id}")
-    public String showComponents(Model model, @PathVariable String id){
+    @Autowired
+    public ComponentController(ComponentsServiceImpl componentsServiceImpl) {
+        this.componentsServiceImpl = componentsServiceImpl;
+    }
 
-        int ids = Integer.parseInt(id);
-        List<Components> listOfProjectComponents = projectServiceImpl.getProjectById(ids).getProjectComponent();
-        model.addAttribute("components", listOfProjectComponents);
-        return "all-project-components-page";
+
+
+    @RequestMapping(value = "/deleteComponent")
+    public String deleteComponent(@RequestParam("componentId") long componentId, @RequestParam("projectId") String projectId) {
+        componentsServiceImpl.deleteComponentsById(componentId);
+        return "redirect:/project/list/" + projectId;
     }
 }

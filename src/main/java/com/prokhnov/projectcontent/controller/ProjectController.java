@@ -27,10 +27,12 @@ public class ProjectController {
         int ids = Integer.parseInt(id);
         List<Components> listOfProjectComponents = projectServiceImpl.getProjectById(ids).getProjectComponent();
         model.addAttribute("components", listOfProjectComponents);
+        model.addAttribute("id",id);
+        model.addAttribute("nameOfProject", projectServiceImpl.getProjectById(ids).getProjectName());
         return "all-project-components-page";
     }
 
-    @GetMapping(value = "/list")
+    @RequestMapping(value = "/list")
     public String showAllProjects(Model model) {
         List<Project> allProjects = projectServiceImpl.getAllProjects();
         model.addAttribute("projects", allProjects);
