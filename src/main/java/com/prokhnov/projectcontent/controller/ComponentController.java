@@ -46,13 +46,13 @@ public class ComponentController {
         for (Components c : list) {
             if (components.getComponentId() == c.getComponentId()) {
                 flag = true;
+                break;
             }
         }
 
         if (flag) {
             componentsServiceImpl.saveComponents(components);
         } else {
-            // add component
             Project project = projectServiceImpl.getProjectById(projectId);
             project.addComponents(components);
             projectServiceImpl.saveProject(project);

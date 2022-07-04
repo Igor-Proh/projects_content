@@ -7,7 +7,7 @@
 </h2>
 <br>
 
-<%--@elvariable id="project" type="aj"--%>
+
 <form:form action="saveProject" modelAttribute="project">
 
     <form:hidden path="projectId"/>

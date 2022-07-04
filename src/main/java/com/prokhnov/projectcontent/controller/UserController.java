@@ -1,7 +1,6 @@
 package com.prokhnov.projectcontent.controller;
 
 import com.prokhnov.projectcontent.entity.User;
-import com.prokhnov.projectcontent.service.UserService;
 import com.prokhnov.projectcontent.service.UserServiceImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,13 +22,12 @@ public class UserController {
     }
 
     @RequestMapping(value = "/list")
-    public String getAllUsers(Model model){
+    public String getAllUsers(Model model) {
 
         List<User> usersList = userServiceImpl.getAllUsers();
         model.addAttribute("users", usersList);
         return "all-users-page";
     }
-
 
     @RequestMapping(value = "/addUser")
     public String showFormForUser(Model model) {
@@ -52,12 +50,10 @@ public class UserController {
     }
 
     @RequestMapping(value = "/deleteUser")
-    public String deleteProject(@RequestParam("userId") long id){
+    public String deleteProject(@RequestParam("userId") long id) {
         userServiceImpl.deleteUserById(id);
         return "redirect:/user/list";
     }
-
-
 
 
 }

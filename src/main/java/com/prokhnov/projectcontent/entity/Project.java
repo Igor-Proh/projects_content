@@ -1,6 +1,7 @@
 package com.prokhnov.projectcontent.entity;
 
 import com.sun.istack.NotNull;
+import org.springframework.web.bind.annotation.ModelAttribute;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -26,7 +27,7 @@ public class Project {
     @Column(name = "project_date_of_create")
     private Date projectDateOfCreate;
 
-//    @OneToMany(fetch = FetchType.EAGER, cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST,CascadeType.PERSIST,CascadeType.REFRESH,CascadeType.REMOVE})
+    //    @OneToMany(fetch = FetchType.EAGER, cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST,CascadeType.PERSIST,CascadeType.REFRESH,CascadeType.REMOVE})
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "project_id")
     private List<Components> projectComponent;
@@ -72,16 +73,22 @@ public class Project {
         this.projectDateOfCreate = projectDateOfCreate;
     }
 
+    @ModelAttribute("listOfProjectComponents")
     public List<Components> getProjectComponent() {
         return projectComponent;
     }
 
-    public void addComponents(Components components){
-        if (projectComponent == null){
+    public void addComponents(Components components) {
+
+        if (projectComponent == null) {
             projectComponent = new ArrayList<>();
         }
 
         projectComponent.add(components);
+    }
+
+    public void addListOfComponents(List<Components> componentsList) {
+        projectComponent = componentsList;
     }
 
     public void setProjectComponent(List<Components> projectComponent) {
