@@ -1,10 +1,10 @@
 package com.prokhnov.projectcontent.dao;
 
-import com.prokhnov.projectcontent.entity.User;
+import com.prokhnov.projectcontent.entity.Users;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 
 @Repository
-public interface UserDAO extends JpaRepository<User, Long> {
+public interface UsersDAO extends JpaRepository<Users, Long> {
 }

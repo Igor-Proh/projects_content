@@ -14,6 +14,14 @@
 
 <h1>${nameOfProject}</h1>
 
+<c:url var="addButton" value="/components/addComponent">
+    <c:param name="projectId" value="${id}"/>
+</c:url>
+
+<input type="button" value="Add New Component"
+       onclick="window.location.href = '${addButton}'"/>
+<br><br>
+
 <div>
     <table border="3">
         <tr>
@@ -38,9 +46,6 @@
                 <c:param name="projectId" value="${id}"/>
             </c:url>
 
-
-
-
             <tr>
                 <td>${component.componentName}</td>
                 <td>${component.componentQuantity}</td>
@@ -59,14 +64,6 @@
     </table>
 </div>
 <br>
-
-<c:url var="addButton" value="/components/addComponent">
-    <c:param name="projectId" value="${id}"/>
-</c:url>
-
-<input type="button" value="Add New Component"
-       onclick="window.location.href = '${addButton}'"/>
-<br><br>
 
 <input type="button" value="Back"
        onclick="window.location.href = '${pageContext.request.contextPath}/project/list'"/>

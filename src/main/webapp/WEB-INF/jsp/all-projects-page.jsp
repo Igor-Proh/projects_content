@@ -1,5 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 
 <!DOCTYPE HTML>
 <html>
@@ -19,10 +20,21 @@
             <th>Name</th>
             <th>Description</th>
             <th>Date</th>
+            <security:authorize access="hasRole('ADMIN')">
             <th>Operations</th>
+            </security:authorize>
         </tr>
 
         <jsp:useBean id="projects" scope="request" type="java.util.List"/>
+
+        <security:authorize access="hasRole('ADMIN')">
+            <input type="button" value="Add New Project"
+                   onclick="window.location.href = '/project/addProject'"/>
+        </security:authorize>
+
+        <br>
+        <br>
+
         <c:forEach var="project" items="${projects}">
 
 
@@ -40,20 +52,18 @@
                 <td><a href="${project.projectId}">${project.projectName}</a></td>
                 <td>${project.projectDescription}</td>
                 <td><fmt:formatDate value="${project.projectDateOfCreate}" pattern="yyyy.MM.dd" /></td>
+                <security:authorize access="hasRole('ADMIN')">
                 <td>
                     <input type="button" value="Update"
                            onclick="window.location.href='${updateButton}'"/>
                     <input type="button" value="Delete"
                            onclick="window.location.href='${deleteButton}'"/>
                 </td>
+                </security:authorize>
             </tr>
         </c:forEach>
     </table>
 </div>
-<br>
-<input type="button" value="Add New Project"
-       onclick="window.location.href = '/project/addProject'"/>
-<br>
 <br>
 
 <input type="button" value="Back"

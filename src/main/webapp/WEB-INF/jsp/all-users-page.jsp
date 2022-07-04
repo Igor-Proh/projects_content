@@ -14,12 +14,9 @@
 <div>
     <table border="1">
         <tr>
-            <th>Id</th>
             <th>Name</th>
-            <th>Surname</th>
-            <th>Email</th>
-<%--            <th>Role</th>--%>
-            <th>Is Active</th>
+            <th>Password</th>
+            <th>Enabled</th>
             <th>Operations</th>
         </tr>
 <%--        <jsp:useBean id="projects" scope="request" type="java.util.List"/>--%>
@@ -28,21 +25,18 @@
 
 
             <c:url var="updateButton" value="/user/updateUser">
-                <c:param name="userId" value="${user.userId}"/>
+                <c:param name="userId" value="${user.userName}"/>
             </c:url>
 
             <c:url var="deleteButton" value="/user/deleteUser">
-                <c:param name="userId" value="${user.userId}"/>
+                <c:param name="userId" value="${user.userName}"/>
             </c:url>
 
 
             <tr>
-                <td>${user.userId} </td>
                 <td>${user.userName}</td>
-                <td>${user.userSurname}</td>
-                <td>${user.userEmail}</td>
-<%--                <td>${user.userRole}</td>--%>
-                <td>${user.userIsActive}</td>
+                <td>${user.userPassword}</td>
+                <td>${user.userEnabled}</td>
                 <td>
                     <input type="button" value="Update"
                            onclick="window.location.href='${updateButton}'"/>

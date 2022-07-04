@@ -1,7 +1,7 @@
 package com.prokhnov.projectcontent.controller;
 
-import com.prokhnov.projectcontent.entity.User;
-import com.prokhnov.projectcontent.service.UserServiceImpl;
+import com.prokhnov.projectcontent.entity.Users;
+import com.prokhnov.projectcontent.service.UsersServiceImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -13,38 +13,38 @@ import java.util.List;
 
 @Controller
 @RequestMapping(value = "user")
-public class UserController {
+public class UsersController {
 
-    private final UserServiceImpl userServiceImpl;
+    private final UsersServiceImpl userServiceImpl;
 
-    public UserController(UserServiceImpl userServiceImpl) {
+    public UsersController(UsersServiceImpl userServiceImpl) {
         this.userServiceImpl = userServiceImpl;
     }
 
     @RequestMapping(value = "/list")
     public String getAllUsers(Model model) {
 
-        List<User> usersList = userServiceImpl.getAllUsers();
+        List<Users> usersList = userServiceImpl.getAllUsers();
         model.addAttribute("users", usersList);
         return "all-users-page";
     }
 
     @RequestMapping(value = "/addUser")
     public String addUser(Model model) {
-        User user = new User();
+        Users user = new Users();
         model.addAttribute("user", user);
         return "user-page";
     }
 
     @RequestMapping(value = "/saveUser")
-    public String saveUser(@ModelAttribute("user") User user) {
+    public String saveUser(@ModelAttribute("user") Users user) {
         userServiceImpl.saveUser(user);
         return "redirect:/user/list";
     }
 
     @RequestMapping(value = "/updateUser", method = RequestMethod.GET)
     public String updateUser(@RequestParam("userId") long id, Model model) {
-        User user = userServiceImpl.getUserById(id);
+        Users user = userServiceImpl.getUserById(id);
         model.addAttribute("user", user);
         return "user-page";
     }

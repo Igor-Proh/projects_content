@@ -10,15 +10,11 @@
 <%--@elvariable id="user" type="aj"--%>
 <form:form action="saveUser" modelAttribute="user">
 
-    <form:hidden path="userId"/>
-
     Name: <form:input path="userName"/>
     <br><br>
-    Surname: <form:input path="userSurname"/>
+    Password: <form:input path="userPassword"/>
     <br><br>
-    Email: <form:input path="userEmail"/>
-    <br><br>
-    Is Active: <form:checkbox path="userIsActive"/>
+    Enabled: <form:input path="userEnabled"/>
     <br><br>
 
     <input type="submit" value="Save">
