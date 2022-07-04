@@ -3,6 +3,7 @@ package com.prokhnov.projectcontent.entity;
 import com.sun.istack.NotNull;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -25,7 +26,8 @@ public class Project {
     @Column(name = "project_date_of_create")
     private Date projectDateOfCreate;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.EAGER, cascade = {CascadeType.DETACH, CascadeType.PERSIST,CascadeType.PERSIST,CascadeType.REFRESH,CascadeType.REMOVE})
+//    @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "project_id")
     private List<Components> projectComponent;
 
@@ -72,6 +74,14 @@ public class Project {
 
     public List<Components> getProjectComponent() {
         return projectComponent;
+    }
+
+    public void addComponents(Components components){
+        if (projectComponent == null){
+            projectComponent = new ArrayList<>();
+        }
+
+        projectComponent.add(components);
     }
 
     public void setProjectComponent(List<Components> projectComponent) {

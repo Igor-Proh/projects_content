@@ -1,8 +1,13 @@
 package com.prokhnov.projectcontent.controller;
 
+import com.prokhnov.projectcontent.entity.Components;
 import com.prokhnov.projectcontent.service.ComponentsServiceImpl;
+import com.prokhnov.projectcontent.service.ProjectServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -11,13 +16,43 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class ComponentController {
 
     private final ComponentsServiceImpl componentsServiceImpl;
+    private final ProjectServiceImpl projectServiceImpl;
 
     @Autowired
-    public ComponentController(ComponentsServiceImpl componentsServiceImpl) {
+    public ComponentController(ComponentsServiceImpl componentsServiceImpl, ProjectServiceImpl projectServiceImpl) {
         this.componentsServiceImpl = componentsServiceImpl;
+        this.projectServiceImpl = projectServiceImpl;
     }
 
+    @RequestMapping(value = "/addComponent")
+    public String showFormForAdd(@RequestParam("projectId") long projectId, Model model) {
+        Components components = new Components();
+        model.addAttribute("component", components);
+        String id = String.valueOf(projectId);
+        model.addAttribute("projectId", id);
+        return "component-page";
+    }
 
+    @RequestMapping(value = "/saveComponent/{projectId}")
+    public String saveComponent(@PathVariable long projectId, @ModelAttribute("component") Components components) {
+
+        long compId = components.getComponentId();
+
+//        Do not work add button !!!!
+
+        componentsServiceImpl.saveComponents(components);
+
+        String id = String.valueOf(projectId);
+        return "redirect:/project/list/" + id;
+    }
+
+    @RequestMapping(value = "/updateComponent")
+    public String updateComponent(@RequestParam("componentId") long componentId, @RequestParam("projectId") String projectId, Model model) {
+        Components components = componentsServiceImpl.getComponentsById(componentId);
+        model.addAttribute("component", components);
+        model.addAttribute("projectId", projectId);
+        return "component-page";
+    }
 
     @RequestMapping(value = "/deleteComponent")
     public String deleteComponent(@RequestParam("componentId") long componentId, @RequestParam("projectId") String projectId) {

@@ -7,6 +7,7 @@
 </h2>
 <br>
 
+<%--@elvariable id="user" type="aj"--%>
 <form:form action="saveUser" modelAttribute="user">
 
     <form:hidden path="userId"/>

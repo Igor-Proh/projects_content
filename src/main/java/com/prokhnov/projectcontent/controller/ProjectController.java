@@ -53,9 +53,9 @@ public class ProjectController {
         return "redirect:/project/list";
     }
 
-    @RequestMapping(value = "/updateProject", method = RequestMethod.GET)
-    public String updateProject(@RequestParam("projectId") long id, Model model) {
-        Project project = projectServiceImpl.getProjectById(id);
+    @RequestMapping(value = "/updateProject")
+    public String updateProject(@RequestParam("projectId") long projectId, Model model) {
+        Project project = projectServiceImpl.getProjectById(projectId);
         model.addAttribute("project", project);
         return "project-page";
     }

@@ -29,12 +29,16 @@
 
             <c:url var="updateButton" value="/components/updateComponent">
                 <c:param name="componentId" value="${component.componentId}"/>
+                <c:param name="projectId" value="${id}"/>
             </c:url>
 
             <c:url var="deleteButton" value="/components/deleteComponent">
                 <c:param name="componentId" value="${component.componentId}"/>
                 <c:param name="projectId" value="${id}"/>
             </c:url>
+
+
+
 
             <tr>
                 <td>${component.componentName}</td>
@@ -55,8 +59,12 @@
 </div>
 <br>
 
+<c:url var="addButton" value="/components/addComponent">
+    <c:param name="projectId" value="${id}"/>
+</c:url>
+
 <input type="button" value="Add New Component"
-       onclick="window.location.href = '/components/addComponent'"/>
+       onclick="window.location.href = '${addButton}'"/>
 <br><br>
 
 <input type="button" value="Back"
