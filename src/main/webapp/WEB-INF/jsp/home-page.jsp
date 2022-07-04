@@ -1,3 +1,4 @@
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 
 <!DOCTYPE html>
 
@@ -10,8 +11,9 @@
 <a href="${pageContext.request.contextPath}/project/list/">List of Projects (for Everyone)</a>
 <br>
 <br>
+<security:authorize access="hasRole('ADMIN')">
 <a href="${pageContext.request.contextPath}/user/list">List of Users (for Admin)</a>
-
+</security:authorize>
 <br>
 <br>
 <br>
