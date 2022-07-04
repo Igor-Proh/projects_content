@@ -1,4 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <!DOCTYPE HTML>
 <html>
@@ -44,7 +45,7 @@
                 <td>${component.componentName}</td>
                 <td>${component.componentQuantity}</td>
                 <td>${component.componentDescription}</td>
-                <td>${component.componentDateOfCreate}</td>
+                <td><fmt:formatDate value="${component.componentDateOfCreate}" pattern="yyyy.MM.dd" /></td>
                 <td>
 
                     <input type="button" value="Update"

@@ -1,4 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <!DOCTYPE HTML>
 <html>
@@ -38,7 +39,7 @@
                 <td>${project.projectId}</td>
                 <td><a href="${project.projectId}">${project.projectName}</a></td>
                 <td>${project.projectDescription}</td>
-                <td>${project.projectDateOfCreate}</td>
+                <td><fmt:formatDate value="${project.projectDateOfCreate}" pattern="yyyy.MM.dd" /></td>
                 <td>
                     <input type="button" value="Update"
                            onclick="window.location.href='${updateButton}'"/>

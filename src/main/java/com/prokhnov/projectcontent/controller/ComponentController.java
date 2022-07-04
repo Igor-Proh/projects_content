@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -39,6 +40,7 @@ public class ComponentController {
     @RequestMapping(value = "/saveComponent/{projectId}")
     public String saveComponent(@PathVariable long projectId, @ModelAttribute("component") Components components) {
 
+        components.setComponentDateOfCreate(new Date());
 
         boolean flag = false;
         List<Components> list = projectServiceImpl.getProjectById(projectId).getProjectComponent();

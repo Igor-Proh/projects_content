@@ -57,6 +57,8 @@ public class ProjectController {
             project.addListOfComponents(projectServiceImpl.getProjectById(project.getProjectId()).getProjectComponent());
         }
 
+        System.out.println(new Date());
+        project.setProjectDateOfCreate(new Date());
         projectServiceImpl.saveProject(project);
         return "redirect:/project/list";
     }
