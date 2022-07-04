@@ -29,7 +29,7 @@ public class ComponentController {
     }
 
     @RequestMapping(value = "/addComponent")
-    public String showFormForAdd(@RequestParam("projectId") long projectId, Model model) {
+    public String addComponent(@RequestParam("projectId") long projectId, Model model) {
         Components components = new Components();
         model.addAttribute("component", components);
         String id = String.valueOf(projectId);

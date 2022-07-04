@@ -18,7 +18,8 @@
     <br><br>
 
     <input type="submit" value="Save">
-    <button href="/project/list/">Back</button>
+    <input type="button" value="Back"
+           onclick="window.location.href = '/project/list/'"/>
 
 </form:form>
 

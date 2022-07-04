@@ -30,27 +30,27 @@ public class UserController {
     }
 
     @RequestMapping(value = "/addUser")
-    public String showFormForUser(Model model) {
+    public String addUser(Model model) {
         User user = new User();
         model.addAttribute("user", user);
         return "user-page";
     }
 
     @RequestMapping(value = "/saveUser")
-    public String saveProject(@ModelAttribute("user") User user) {
+    public String saveUser(@ModelAttribute("user") User user) {
         userServiceImpl.saveUser(user);
         return "redirect:/user/list";
     }
 
     @RequestMapping(value = "/updateUser", method = RequestMethod.GET)
-    public String updateProject(@RequestParam("userId") long id, Model model) {
+    public String updateUser(@RequestParam("userId") long id, Model model) {
         User user = userServiceImpl.getUserById(id);
         model.addAttribute("user", user);
         return "user-page";
     }
 
     @RequestMapping(value = "/deleteUser")
-    public String deleteProject(@RequestParam("userId") long id) {
+    public String deleteUser(@RequestParam("userId") long id) {
         userServiceImpl.deleteUserById(id);
         return "redirect:/user/list";
     }

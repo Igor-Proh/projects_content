@@ -36,14 +36,14 @@ public class ProjectController {
     }
 
     @RequestMapping(value = "/list")
-    public String showAllProjects(Model model) {
+    public String getAllProjects(Model model) {
         List<Project> allProjects = projectServiceImpl.getAllProjects();
         model.addAttribute("projects", allProjects);
         return "all-projects-page";
     }
 
     @RequestMapping(value = "/addProject")
-    public String showFormForAdd(Model model) {
+    public String addProject(Model model) {
         Project project = new Project();
         project.setProjectDateOfCreate(new Date());
         model.addAttribute("project", project);
@@ -57,7 +57,6 @@ public class ProjectController {
             project.addListOfComponents(projectServiceImpl.getProjectById(project.getProjectId()).getProjectComponent());
         }
 
-        System.out.println(new Date());
         project.setProjectDateOfCreate(new Date());
         projectServiceImpl.saveProject(project);
         return "redirect:/project/list";
