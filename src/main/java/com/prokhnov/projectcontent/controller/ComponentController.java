@@ -1,6 +1,7 @@
 package com.prokhnov.projectcontent.controller;
 
 import com.prokhnov.projectcontent.entity.Components;
+import com.prokhnov.projectcontent.entity.Project;
 import com.prokhnov.projectcontent.service.ComponentsServiceImpl;
 import com.prokhnov.projectcontent.service.ProjectServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.List;
 
 @Controller
 @RequestMapping(value = "components")
@@ -36,11 +39,24 @@ public class ComponentController {
     @RequestMapping(value = "/saveComponent/{projectId}")
     public String saveComponent(@PathVariable long projectId, @ModelAttribute("component") Components components) {
 
-        long compId = components.getComponentId();
 
-//        Do not work add button !!!!
+        boolean flag = false;
+        List<Components> list = projectServiceImpl.getProjectById(projectId).getProjectComponent();
 
-        componentsServiceImpl.saveComponents(components);
+        for (Components c : list) {
+            if (components.getComponentId() == c.getComponentId()) {
+                flag = true;
+            }
+        }
+
+        if (flag) {
+            componentsServiceImpl.saveComponents(components);
+        } else {
+            // add component
+            Project project = projectServiceImpl.getProjectById(projectId);
+            project.addComponents(components);
+            projectServiceImpl.saveProject(project);
+        }
 
         String id = String.valueOf(projectId);
         return "redirect:/project/list/" + id;
