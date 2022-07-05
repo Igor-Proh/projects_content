@@ -21,7 +21,7 @@
         </tr>
 <%--        <jsp:useBean id="projects" scope="request" type="java.util.List"/>--%>
 
-        <c:forEach var="user" items="${users}" >
+        <c:forEach var="user" items="${user}" >
 
 
             <c:url var="updateButton" value="/user/updateUser">
