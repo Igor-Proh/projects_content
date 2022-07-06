@@ -9,15 +9,11 @@ import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
 
-@Component
+
 public class UserValidator implements Validator {
 
-    private final UserService userService;
-
     @Autowired
-    public UserValidator(UserService userService) {
-        this.userService = userService;
-    }
+    private  UserService userService;
 
     @Override
     public boolean supports(Class<?> clazz) {
@@ -29,21 +25,21 @@ public class UserValidator implements Validator {
 
         User user = (User) target;
 
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "username", "NotEmpty");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "userName", "NotEmpty");
         if (user.getUserName().length() < 6 || user.getUserName().length() > 32) {
-            errors.rejectValue("username", "Size.userForm.username");
+            errors.rejectValue("userName", "Size.userForm.userName");
         }
         if (userService.findByUserName(user.getUserName()) != null) {
-            errors.rejectValue("username", "Duplicate.userForm.username");
+            errors.rejectValue("userName", "Duplicate.userForm.userName");
         }
 
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password", "NotEmpty");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "userPassword", "NotEmpty");
         if (user.getUserPassword().length() < 8 || user.getUserPassword().length() > 32) {
-            errors.rejectValue("password", "Size.userForm.password");
+            errors.rejectValue("userPassword", "Size.userForm.userPassword");
         }
 
-        if (!user.getUserConfirmPassword().equals(user.getUserPassword())) {
-            errors.rejectValue("passwordConfirm", "Diff.userForm.passwordConfirm");
-        }
+//        if (!user.getUserConfirmPassword().equals(user.getUserPassword())) {
+//            errors.rejectValue("userConfirmPassword", "Diff.userForm.userConfirmPassword");
+//        }
     }
 }

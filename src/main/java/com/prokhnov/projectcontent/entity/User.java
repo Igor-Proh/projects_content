@@ -1,11 +1,12 @@
 package com.prokhnov.projectcontent.entity;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
 @Entity
-@Table(name = "users")
+@Table(name = "user")
 public class User {
 
     @Id
@@ -19,22 +20,22 @@ public class User {
     @Column(name = "user_password")
     private String userPassword;
 
-    @Column(name = "user_confirm_password")
-    private String userConfirmPassword;
+    @Column(name = "user_enabled")
+    private boolean userEnabled;
 
-    @ManyToMany
-    @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id")
-            , inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private Set<Role> roles;
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinTable(name = "user_role",
+            joinColumns = @JoinColumn(name = "user_id",referencedColumnName = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id",referencedColumnName = "role_id"))
+    private Set<Role> roles = new HashSet<>();
 
     public User() {
     }
 
-    public User(long userId, String userName, String userPassword, String userConfirmPassword) {
-        this.userId = userId;
+    public User(String userName, String userPassword, boolean userEnabled) {
         this.userName = userName;
         this.userPassword = userPassword;
-        this.userConfirmPassword = userConfirmPassword;
+        this.userEnabled = userEnabled;
     }
 
     public long getUserId() {
@@ -61,12 +62,12 @@ public class User {
         this.userPassword = userPassword;
     }
 
-    public String getUserConfirmPassword() {
-        return userConfirmPassword;
+    public boolean isUserEnabled() {
+        return userEnabled;
     }
 
-    public void setUserConfirmPassword(String userConfirmPassword) {
-        this.userConfirmPassword = userConfirmPassword;
+    public void setUserEnabled(boolean userEnabled) {
+        this.userEnabled = userEnabled;
     }
 
     public Set<Role> getRoles() {
@@ -75,30 +76,5 @@ public class User {
 
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        User user = (User) o;
-        return userId == user.userId && Objects.equals(userName, user.userName) && Objects.equals(userPassword, user.userPassword) && Objects.equals(userConfirmPassword, user.userConfirmPassword) && Objects.equals(roles, user.roles);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(userId, userName, userPassword, userConfirmPassword, roles);
-    }
-
-    @Override
-    public String
-    toString() {
-        return "Users{" +
-                "userId=" + userId +
-                ", userName='" + userName + '\'' +
-                ", userPassword='" + userPassword + '\'' +
-                ", userConfirmPassword='" + userConfirmPassword + '\'' +
-                ", roles=" + roles +
-                '}';
     }
 }

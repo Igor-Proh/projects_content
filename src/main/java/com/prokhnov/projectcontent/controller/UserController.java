@@ -7,30 +7,24 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
-//@RequestMapping(value = "user")
+@RequestMapping(value = "user")
 public class UserController {
-
-    private final UserService userService;
-    private final UserValidator userValidator;
-
     @Autowired
-    public UserController(UserService userService, UserValidator userValidator) {
-        this.userService = userService;
-        this.userValidator = userValidator;
-    }
+    private UserService userService;
+//    @Autowired
+    private UserValidator userValidator;
 
-    @RequestMapping(value = "/registration", method = RequestMethod.GET)
+
+    @GetMapping(value = "/registration")
     public String userRegistration(Model model) {
         model.addAttribute("userForm", new User());
         return "registration-page";
     }
 
-    @RequestMapping(value = "/registration", method = RequestMethod.POST)
+    @PostMapping(value = "/registration")
     public String userRegistration(@ModelAttribute("userForm") User userForm, BindingResult bindingResult) {
         userValidator.validate(userForm, bindingResult);
 
@@ -42,7 +36,7 @@ public class UserController {
         return "redirect:/";
     }
 
-    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    @GetMapping(value = "/login")
     public String userLogin(Model model, String error, String logout) {
 
         if (error != null)
@@ -51,10 +45,10 @@ public class UserController {
         if (logout != null)
             model.addAttribute("message", "You have been logged out successfully.");
 
-        return "login-page";
+        return "custom-page";
     }
 
-    @RequestMapping(value = "/", method = RequestMethod.GET)
+    @GetMapping(value = "/")
     public String homePage(Model model) {
         return "welcome-page";
     }

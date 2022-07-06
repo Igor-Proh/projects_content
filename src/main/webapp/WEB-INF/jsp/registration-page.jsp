@@ -1,8 +1,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<%--<c:set var="contextPath" value="${pageContext.request.contextPath}"/>--%>
-<c:set var="contextPath" value=""/>
+<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -18,29 +17,28 @@
 
 <div class="container">
 
-    <%--@elvariable id="userForm" type="aj"--%>
     <form:form method="POST" modelAttribute="userForm" class="form-signin">
         <h2 class="form-signin-heading">Create your account</h2>
-        <spring:bind path="username">
+        <spring:bind path="userName">
             <div class="form-group ${status.error ? 'has-error' : ''}">
-                <form:input type="text" path="username" class="form-control" placeholder="Username"
+                <form:input type="text" path="userName" class="form-control" placeholder="Username"
                             autofocus="true"></form:input>
-                <form:errors path="username"></form:errors>
+                <form:errors path="userName"></form:errors>
             </div>
         </spring:bind>
 
-        <spring:bind path="password">
+        <spring:bind path="userPassword">
             <div class="form-group ${status.error ? 'has-error' : ''}">
-                <form:input type="password" path="password" class="form-control" placeholder="Password"></form:input>
-                <form:errors path="password"></form:errors>
+                <form:input type="password" path="userPassword" class="form-control" placeholder="Password"></form:input>
+                <form:errors path="userPassword"></form:errors>
             </div>
         </spring:bind>
 
-        <spring:bind path="passwordConfirm">
+        <spring:bind path="userConfirmPassword">
             <div class="form-group ${status.error ? 'has-error' : ''}">
-                <form:input type="password" path="passwordConfirm" class="form-control"
+                <form:input type="password" path="userConfirmPassword" class="form-control"
                             placeholder="Confirm your password"></form:input>
-                <form:errors path="passwordConfirm"></form:errors>
+                <form:errors path="userConfirmPassword"></form:errors>
             </div>
         </spring:bind>
 

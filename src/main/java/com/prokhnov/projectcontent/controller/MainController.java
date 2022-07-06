@@ -9,5 +9,11 @@ public class MainController {
     @RequestMapping({"/", "/hello"})
     public String showHomePage() {
         return "home-page";
+
+    }
+
+    @RequestMapping("/ololo")
+    public String a(){
+        return "custom-page";
     }
 }
