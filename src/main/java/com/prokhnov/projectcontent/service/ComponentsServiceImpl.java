@@ -38,4 +38,5 @@ public class ComponentsServiceImpl implements ComponentsService {
     public void deleteComponentsById(long id) {
         componentsDAO.deleteById(id);
     }
+
 }

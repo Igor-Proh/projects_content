@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
 import java.util.List;
 
@@ -25,7 +26,7 @@ public class ProjectController {
         this.projectServiceImpl = projectServiceImpl;
     }
 
-    @RequestMapping({"/list/{id}", "{id}"})
+    @RequestMapping({"/list/{id}", "{id}", "/list/sort/{id}"})
     public String showComponents(Model model, @PathVariable String id) {
         int ids = Integer.parseInt(id);
         List<Components> listOfProjectComponents = projectServiceImpl.getProjectById(ids).getProjectComponent();
@@ -65,7 +66,6 @@ public class ProjectController {
     @RequestMapping(value = "/updateProject")
     public String updateProject(@RequestParam("projectId") long projectId, Model model) {
         Project project = projectServiceImpl.getProjectById(projectId);
-
         model.addAttribute("project", project);
         return "project-page";
     }
@@ -74,6 +74,13 @@ public class ProjectController {
     public String deleteProject(@RequestParam("projectId") long id) {
         projectServiceImpl.deleteProjectById(id);
         return "redirect:/project/list";
+    }
+
+    @RequestMapping(value = "/list/sort")
+    public String sortList(Model model, HttpServletRequest request) {
+        List<Project> sortList = projectServiceImpl.getAllProjectsAndSortBy(request.getParameter("dropdown"));
+        model.addAttribute("projects", sortList);
+        return "all-projects-page";
     }
 
 }

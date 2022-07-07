@@ -7,11 +7,9 @@ import com.prokhnov.projectcontent.service.ProjectServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
 import java.util.List;
 
@@ -35,6 +33,20 @@ public class ComponentController {
         String id = String.valueOf(projectId);
         model.addAttribute("projectId", id);
         return "component-page";
+    }
+    
+    @RequestMapping(value = "/sort/{id}", method = RequestMethod.GET)
+    public String sortBy(@PathVariable long id, HttpServletRequest request, Model model){
+
+        List<Components> listOfProjectComponents = projectServiceImpl.getProjectById(id).getProjectComponent();
+
+        List<Components> sortListOfProjectComponents =projectServiceImpl.getAllComponentsAndSortBy(id,request.getParameter("dropdown"));
+
+
+        model.addAttribute("components",sortListOfProjectComponents);
+        model.addAttribute("id", id);
+        model.addAttribute("nameOfProject", projectServiceImpl.getProjectById(id).getProjectName());
+        return "all-project-components-page";
     }
 
     @RequestMapping(value = "/saveComponent/{projectId}")

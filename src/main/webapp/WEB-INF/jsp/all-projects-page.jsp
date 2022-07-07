@@ -1,6 +1,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <!DOCTYPE HTML>
 <html>
@@ -13,6 +14,25 @@
 <h1>Projects List</h1>
 
 <br>
+
+<form:form action="/project/list/sort/" method="get">
+    <i> Sort By:</i>
+<select id="dropdown" name="dropdown">
+        <option value="id lowest first">Id L-H</option>
+        <option value="id highest first">Id H-L</option>
+        <option value="name a-z">Name A-Z</option>
+        <option value="name z-a">Name Z-A</option>
+        <option value="description a-z">Description A-Z</option>
+        <option value="description z-a">Description Z-A</option>
+        <option value="date lowest first">Date L-H</option>
+        <option value="date highest first">Date H-L</option>
+</select>
+
+    <input type="submit" value="Sort">
+</form:form>
+
+<br>
+
 <div>
     <table border="3">
         <tr>
