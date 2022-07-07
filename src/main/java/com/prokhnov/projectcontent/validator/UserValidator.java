@@ -9,7 +9,7 @@ import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
 
-
+@Component
 public class UserValidator implements Validator {
 
     @Autowired
@@ -22,7 +22,6 @@ public class UserValidator implements Validator {
 
     @Override
     public void validate(Object target, Errors errors) {
-
         User user = (User) target;
 
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "userName", "NotEmpty");
@@ -38,8 +37,8 @@ public class UserValidator implements Validator {
             errors.rejectValue("userPassword", "Size.userForm.userPassword");
         }
 
-//        if (!user.getUserConfirmPassword().equals(user.getUserPassword())) {
-//            errors.rejectValue("userConfirmPassword", "Diff.userForm.userConfirmPassword");
-//        }
+        if (!user.getUserConfirmPassword().equals(user.getUserPassword())) {
+            errors.rejectValue("userConfirmPassword", "Diff.userForm.userConfirmPassword");
+        }
     }
 }

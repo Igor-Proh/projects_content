@@ -25,8 +25,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void saveUser(User user) {
-        user.setUserPassword(bCryptPasswordEncoder.encode(user.getUserPassword()));
-        user.setRoles(new HashSet<>(roleDAO.findAll()));
+//        user.setUserPassword(bCryptPasswordEncoder.encode(user.getUserPassword()));
+//        user.setRoles(new HashSet<>(roleDAO.findAll()));
         userDAO.save(user);
     }
 
@@ -34,4 +34,25 @@ public class UserServiceImpl implements UserService {
     public User findByUserName(String userName) {
         return userDAO.findByUserName(userName);
     }
+
+    @Override
+    public List<User> findAllUsers() {
+        return userDAO.findAll();
+    }
+
+    @Override
+    public User getUserById(long id) {
+
+        if (userDAO.findById(id).isPresent()) {
+            return userDAO.findById(id).get();
+        } else {
+            throw new NullPointerException();
+        }
+    }
+
+    @Override
+    public void deleteUserById(long id) {
+        userDAO.deleteById(id);
+    }
+
 }

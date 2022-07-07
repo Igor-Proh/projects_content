@@ -23,6 +23,9 @@ public class User {
     @Column(name = "user_enabled")
     private boolean userEnabled;
 
+    @Transient
+    private String userConfirmPassword;
+
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(name = "user_role",
             joinColumns = @JoinColumn(name = "user_id",referencedColumnName = "user_id"),
@@ -76,5 +79,17 @@ public class User {
 
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
+    }
+
+    public String getUserConfirmPassword() {
+        return userConfirmPassword;
+    }
+
+    public void setUserConfirmPassword(String userConfirmPassword) {
+        this.userConfirmPassword = userConfirmPassword;
+    }
+
+    public void userAddRole(String role){
+        roles.add(new Role(role));
     }
 }

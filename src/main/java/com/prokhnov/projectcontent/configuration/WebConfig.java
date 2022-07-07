@@ -19,4 +19,8 @@ public class WebConfig implements WebMvcConfigurer {
         registry.addResourceHandler("/WEB-INF/jsp/**").addResourceLocations("/WEB-INF/jsp/");
 
     }
+//    @Override
+//    public void addViewControllers(ViewControllerRegistry registry) {
+//        registry.addViewController("/login").setViewName("login");
+//    }
 }

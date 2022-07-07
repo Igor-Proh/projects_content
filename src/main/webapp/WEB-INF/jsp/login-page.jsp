@@ -1,40 +1,49 @@
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-
-<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
-
-<!DOCTYPE html>
-<html lang="en">
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<html>
 <head>
-    <meta charset="utf-8">
-    <title>Log in with your account</title>
+    <title>Login Form</title>
 
-    <link href="${contextPath}/resources/css/bootstrap.min.css" rel="stylesheet">
-    <link href="${contextPath}/resources/css/common.css" rel="stylesheet">
+    <style>
+        .failed{
+            color: red;
+        }
+    </style>
 </head>
 
 <body>
+<h3>Please Sign In</h3>
 
-<div class="container">
-    <form method="POST" action="${contextPath}/login" class="form-signin">
-        <h2 class="form-heading">Log in</h2>
 
-        <div class="form-group ${error != null ? 'has-error' : ''}">
-            <span>${message}</span>
-            <input name="userName" type="text" class="form-control" placeholder="Username"
-                   autofocus="true"/>
-            <input name="userPassword" type="password" class="form-control" placeholder="Password"/>
-            <span>${error}</span>
-            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 
-            <button class="btn btn-lg btn-primary btn-block" type="submit">Log In</button>
-            <h4 class="text-center"><a href="${contextPath}/registration">Create an account</a></h4>
-        </div>
-    </form>
-</div>
+<form:form action="${pageContext.request.contextPath}/authenticateTheUser"
+           method="post">
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-<script src="${contextPath}/resources/js/bootstrap.min.js"></script>
+    <!-- Check for login error -->
+    <c:if test="${param.error!=null}">
+
+        <i class="failed">Sorry! You entered invalid username/password.</i>
+
+    </c:if>
+
+    <p>
+        User name: <input type="text" name="username"/>
+    </p>
+
+    <p>
+        Password: <input type="password" name="password"/>
+    </p>
+
+
+    <input type="submit" value="Sign in"/>
+    <input type="button" value="Registration"
+           onclick="window.location.href='/user/registration'"/>
+    <input type="button" value="Home Page"
+           onclick="window.location.href='/'"/>
+
+</form:form>
+
+
 </body>
+
 </html>

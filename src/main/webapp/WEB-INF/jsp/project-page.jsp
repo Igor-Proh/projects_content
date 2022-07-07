@@ -8,6 +8,7 @@
 <br>
 
 
+<%--@elvariable id="project" type="com"--%>
 <form:form action="saveProject" modelAttribute="project">
 
     <form:hidden path="projectId"/>

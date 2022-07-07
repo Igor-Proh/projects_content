@@ -14,7 +14,8 @@
     <br><br>
     Password: <form:input path="userPassword"/>
     <br><br>
-    Enabled: <form:input path="userEnabled"/>
+<%--    Enabled: <form:input path="userEnabled"/>--%>
+    Enabled: <form:checkbox path="userEnabled"/>
     <br><br>
 
     <input type="submit" value="Save">

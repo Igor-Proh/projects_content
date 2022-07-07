@@ -1,53 +1,61 @@
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
-
-<!DOCTYPE html>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    <title>Create an account</title>
+    <title>Registration</title>
 
-    <link href="${contextPath}/resources/css/bootstrap.min.css" rel="stylesheet">
-    <link href="${contextPath}/resources/css/common.css" rel="stylesheet">
+    <style>
+        .failed{
+            color: red;
+        }
+    </style>
+
 </head>
 
 <body>
+<h3>Registration Form</h3>
 
-<div class="container">
 
-    <form:form method="POST" modelAttribute="userForm" class="form-signin">
-        <h2 class="form-signin-heading">Create your account</h2>
-        <spring:bind path="userName">
-            <div class="form-group ${status.error ? 'has-error' : ''}">
-                <form:input type="text" path="userName" class="form-control" placeholder="Username"
-                            autofocus="true"></form:input>
-                <form:errors path="userName"></form:errors>
-            </div>
-        </spring:bind>
 
-        <spring:bind path="userPassword">
-            <div class="form-group ${status.error ? 'has-error' : ''}">
-                <form:input type="password" path="userPassword" class="form-control" placeholder="Password"></form:input>
-                <form:errors path="userPassword"></form:errors>
-            </div>
-        </spring:bind>
+<%--@elvariable id="userForm" type="com"--%>
+<form:form action="/user/registration"
+           method="post" modelAttribute="userForm">
 
-        <spring:bind path="userConfirmPassword">
-            <div class="form-group ${status.error ? 'has-error' : ''}">
-                <form:input type="password" path="userConfirmPassword" class="form-control"
-                            placeholder="Confirm your password"></form:input>
-                <form:errors path="userConfirmPassword"></form:errors>
-            </div>
-        </spring:bind>
+<%--    <p>--%>
+<%--        Name: <input type="text" name="userName"/>--%>
+<%--    </p>--%>
 
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
-    </form:form>
+    <spring:bind path="userName">
+        <div class="form-group ${status.error ? 'has-error' : ''}">
+            <form:input type="text" path="userName"  placeholder="Username"/>
+            <form:errors path="userName"/>
+        </div>
+    </spring:bind>
 
-</div>
+    <p>
+        Password: <input type="password" name="userPassword"/>
+    </p>
+    <c:if test="${param.error!=null}">
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-<script src="${contextPath}/resources/js/bootstrap.min.js"></script>
+        <i class="failed">Sorry! You entered invalid username/password.</i>
+
+    </c:if>
+    <p>
+        Password: <input type="password" name="userConfirmPassword"/>
+    </p>
+
+
+
+    <input type="submit" value="Create User"/>
+    <br>
+    <br>
+    <input type="button" value="Back"
+           onclick="window.location.href='/login'"/>
+
+</form:form>
+
+
 </body>
+
 </html>

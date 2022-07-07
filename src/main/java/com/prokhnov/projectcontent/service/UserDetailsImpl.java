@@ -2,9 +2,11 @@ package com.prokhnov.projectcontent.service;
 
 import com.prokhnov.projectcontent.entity.Role;
 import com.prokhnov.projectcontent.entity.User;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -14,7 +16,7 @@ import java.util.Set;
 
 
 public class UserDetailsImpl implements UserDetails {
-
+    @Autowired
     private User user;
 
     public UserDetailsImpl(User user) {
@@ -27,6 +29,7 @@ public class UserDetailsImpl implements UserDetails {
         List<SimpleGrantedAuthority> authorities = new ArrayList<>();
 
         for (Role role : roles) {
+            System.out.println(role.toString());
             authorities.add(new SimpleGrantedAuthority(role.getRoleName()));
         }
 

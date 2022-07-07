@@ -20,20 +20,21 @@
             <th>Name</th>
             <th>Description</th>
             <th>Date</th>
-            <security:authorize access="hasRole('ADMIN')">
+            <security:authorize access="hasAuthority('ADMIN')">
             <th>Operations</th>
             </security:authorize>
         </tr>
 
         <jsp:useBean id="projects" scope="request" type="java.util.List"/>
 
-        <security:authorize access="hasRole('ADMIN')">
+        <security:authorize access="hasAnyAuthority('ADMIN')">
             <input type="button" value="Add New Project"
                    onclick="window.location.href = '/project/addProject'"/>
-        </security:authorize>
+
 
         <br>
         <br>
+        </security:authorize>
 
         <c:forEach var="project" items="${projects}">
 
@@ -52,7 +53,7 @@
                 <td><a href="${project.projectId}">${project.projectName}</a></td>
                 <td>${project.projectDescription}</td>
                 <td><fmt:formatDate value="${project.projectDateOfCreate}" pattern="yyyy.MM.dd" /></td>
-                <security:authorize access="hasRole('ADMIN')">
+                <security:authorize access="hasAuthority('ADMIN')">
                 <td>
                     <input type="button" value="Update"
                            onclick="window.location.href='${updateButton}'"/>

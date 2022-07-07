@@ -14,6 +14,7 @@
 <div>
     <table border="1">
         <tr>
+            <th>Id</th>
             <th>Name</th>
             <th>Password</th>
             <th>Enabled</th>
@@ -25,15 +26,16 @@
 
 
             <c:url var="updateButton" value="/user/updateUser">
-                <c:param name="userId" value="${user.userName}"/>
+                <c:param name="userId" value="${user.userId}"/>
             </c:url>
 
             <c:url var="deleteButton" value="/user/deleteUser">
-                <c:param name="userId" value="${user.userName}"/>
+                <c:param name="userId" value="${user.userId}"/>
             </c:url>
 
 
             <tr>
+                <td>${user.userId}</td>
                 <td>${user.userName}</td>
                 <td>${user.userPassword}</td>
                 <td>${user.userEnabled}</td>
@@ -49,7 +51,7 @@
 </div>
 <br>
 <input type="button" value="Add New User"
-       onclick="window.location.href = '/user/addUser'"/>
+       onclick="window.location.href = '/user/registration'"/>
 <br>
 <br>
 
