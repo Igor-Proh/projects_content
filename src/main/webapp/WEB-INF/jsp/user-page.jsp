@@ -7,8 +7,10 @@
 </h2>
 <br>
 
-<%--@elvariable id="user" type="aj"--%>
+<%--@elvariable id="user" type="com"--%>
 <form:form action="saveUser" modelAttribute="user">
+
+    <form:hidden path="userId"/>
 
     Name: <form:input path="userName"/>
     <br><br>

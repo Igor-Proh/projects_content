@@ -8,12 +8,22 @@
 <head>
     <meta charset="UTF-8"/>
     <title>Projects</title>
-    <%--    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/style.css"/>--%>
+
 </head>
 <body>
 <h1>Projects List</h1>
 
 <br>
+
+
+<security:authorize access="hasAnyAuthority('ADMIN')">
+    <input type="button" value="Add New Project"
+           onclick="window.location.href = '/project/addProject'"/>
+
+
+    <br>
+    <br>
+</security:authorize>
 
 <form:form action="/project/list/sort/" method="get">
     <i> Sort By:</i>
@@ -27,7 +37,6 @@
         <option value="date lowest first">Date L-H</option>
         <option value="date highest first">Date H-L</option>
 </select>
-
     <input type="submit" value="Sort">
 </form:form>
 
@@ -47,14 +56,7 @@
 
         <jsp:useBean id="projects" scope="request" type="java.util.List"/>
 
-        <security:authorize access="hasAnyAuthority('ADMIN')">
-            <input type="button" value="Add New Project"
-                   onclick="window.location.href = '/project/addProject'"/>
 
-
-        <br>
-        <br>
-        </security:authorize>
 
         <c:forEach var="project" items="${projects}">
 

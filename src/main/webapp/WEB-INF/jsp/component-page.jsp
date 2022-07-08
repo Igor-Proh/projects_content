@@ -7,7 +7,9 @@
     Component
 </h2>
 <br>
+<%
 
+%>
 
 
 <%--@elvariable id="component" type="aj"--%>

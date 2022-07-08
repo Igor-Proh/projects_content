@@ -36,8 +36,8 @@
 
 
     <input type="submit" value="Sign in"/>
-    <input type="button" value="Registration"
-           onclick="window.location.href='/user/registration'"/>
+<%--    <input type="button" value="Registration"--%>
+<%--           onclick="window.location.href='/user/registration'"/>--%>
     <input type="button" value="Home Page"
            onclick="window.location.href='/'"/>
 

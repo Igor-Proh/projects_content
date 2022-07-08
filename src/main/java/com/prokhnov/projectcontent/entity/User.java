@@ -7,6 +7,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "user")
+
 public class User {
 
     @Id
@@ -30,6 +31,7 @@ public class User {
     @JoinTable(name = "user_role",
             joinColumns = @JoinColumn(name = "user_id",referencedColumnName = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id",referencedColumnName = "role_id"))
+//    private Set<Role> roles;
     private Set<Role> roles = new HashSet<>();
 
     public User() {
@@ -91,5 +93,17 @@ public class User {
 
     public void userAddRole(String role){
         roles.add(new Role(role));
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "userId=" + userId +
+                ", userName='" + userName + '\'' +
+                ", userPassword='" + userPassword + '\'' +
+                ", userEnabled=" + userEnabled +
+                ", userConfirmPassword='" + userConfirmPassword + '\'' +
+                ", roles=" + roles +
+                '}';
     }
 }

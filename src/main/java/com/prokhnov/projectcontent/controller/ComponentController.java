@@ -38,7 +38,7 @@ public class ComponentController {
     @RequestMapping(value = "/sort/{id}", method = RequestMethod.GET)
     public String sortBy(@PathVariable long id, HttpServletRequest request, Model model){
 
-        List<Components> listOfProjectComponents = projectServiceImpl.getProjectById(id).getProjectComponent();
+//        List<Components> listOfProjectComponents = projectServiceImpl.getProjectById(id).getProjectComponent();
 
         List<Components> sortListOfProjectComponents =projectServiceImpl.getAllComponentsAndSortBy(id,request.getParameter("dropdown"));
 
