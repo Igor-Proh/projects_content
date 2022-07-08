@@ -5,9 +5,7 @@ import com.prokhnov.projectcontent.entity.Role;
 import com.prokhnov.projectcontent.entity.User;
 import com.prokhnov.projectcontent.service.UserService;
 import com.prokhnov.projectcontent.validator.UserValidator;
-import jdk.internal.dynalink.support.NameCodec;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -19,19 +17,22 @@ import java.util.List;
 @Controller
 @RequestMapping(value = "user")
 public class UserController {
+
+    private final UserService userService;
+    private final UserService userServiceImpl;
+    private final UserValidator userValidator;
+    private final RoleDAO roleDAO;
+
     @Autowired
-    private UserService userService;
-    @Autowired
-    private UserService userServiceImpl;
-    @Autowired
-    private UserValidator userValidator;
-    @Autowired
-    private RoleDAO roleDAO;
-    @Autowired
-    private BCryptPasswordEncoder bCryptPasswordEncoder;
+    public UserController(UserService userService, UserService userServiceImpl, UserValidator userValidator, RoleDAO roleDAO) {
+        this.userService = userService;
+        this.userServiceImpl = userServiceImpl;
+        this.userValidator = userValidator;
+        this.roleDAO = roleDAO;
+    }
 
 
-    @GetMapping(value = "/registration")
+    @RequestMapping(value = "/registration", method = RequestMethod.GET)
     public String userRegistration(Model model) {
         User user = new User();
         model.addAttribute("userForm", user);
@@ -39,37 +40,26 @@ public class UserController {
     }
 
     @RequestMapping(value = "/registration", method = RequestMethod.POST)
-    public String userRegistration(@ModelAttribute("userForm") User userForm, BindingResult bindingResult) {
+    public String userRegistration(@ModelAttribute("userForm") User userForm, BindingResult bindingResult, Model model) {
         userValidator.validate(userForm, bindingResult);
+
 //        if (bindingResult.hasErrors()) {
-
 //            System.out.println(bindingResult.hasErrors());
-
 //            return "registration-page";
 //        }
+
+
         userService.saveUser(userForm);
-        return "redirect:/";
+        model.addAttribute("userId", userForm.getUserId());
+        return "redirect:/user/welcome";
     }
 
-    @GetMapping(value = "/login")
-    public String userLogin(Model model, String error, String logout) {
-
-        if (error != null)
-            model.addAttribute("error", "Your username and password is invalid.");
-
-        if (logout != null)
-            model.addAttribute("message", "You have been logged out successfully.");
-
-        return "custom-page";
-    }
-
-
-    @GetMapping(value = "/welcome")
-    public String homePage(Model model) {
+    @RequestMapping(value = "/welcome", method = RequestMethod.GET)
+    public String homePage() {
         return "welcome-page";
     }
 
-    @RequestMapping(value = "/list")
+    @RequestMapping(value = "/list", method = RequestMethod.GET)
     public String getAllUsers(Model model) {
         List<User> users = userService.findAllUsers();
         model.addAttribute("user", users);
@@ -83,15 +73,16 @@ public class UserController {
         return "user-page";
     }
 
-    @RequestMapping(value = "/deleteUser")
+    @RequestMapping(value = "/deleteUser", method = RequestMethod.GET)
     public String deleteUser(@RequestParam("userId") long id) {
         userService.getUserById(id).setRoles(new HashSet<>());
         userService.deleteUserById(id);
         return "redirect:/user/list";
     }
 
-    @RequestMapping(value = "/saveUser")
+    @RequestMapping(value = "/saveUser", method = RequestMethod.POST)
     public String saveUser(@ModelAttribute("user") User user, Model model) {
+
         if (user.getUserId() != 0) {
             user.setRoles(userService.getUserById(user.getUserId()).getRoles());
         } else {

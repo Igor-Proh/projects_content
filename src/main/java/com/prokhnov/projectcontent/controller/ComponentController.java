@@ -26,7 +26,7 @@ public class ComponentController {
         this.projectServiceImpl = projectServiceImpl;
     }
 
-    @RequestMapping(value = "/addComponent")
+    @RequestMapping(value = "/addComponent", method = RequestMethod.GET)
     public String addComponent(@RequestParam("projectId") long projectId, Model model) {
         Components components = new Components();
         model.addAttribute("component", components);
@@ -37,19 +37,14 @@ public class ComponentController {
     
     @RequestMapping(value = "/sort/{id}", method = RequestMethod.GET)
     public String sortBy(@PathVariable long id, HttpServletRequest request, Model model){
-
-//        List<Components> listOfProjectComponents = projectServiceImpl.getProjectById(id).getProjectComponent();
-
         List<Components> sortListOfProjectComponents =projectServiceImpl.getAllComponentsAndSortBy(id,request.getParameter("dropdown"));
-
-
         model.addAttribute("components",sortListOfProjectComponents);
         model.addAttribute("id", id);
         model.addAttribute("nameOfProject", projectServiceImpl.getProjectById(id).getProjectName());
         return "all-project-components-page";
     }
 
-    @RequestMapping(value = "/saveComponent/{projectId}")
+    @RequestMapping(value = "/saveComponent/{projectId}", method = RequestMethod.POST)
     public String saveComponent(@PathVariable long projectId, @ModelAttribute("component") Components components) {
 
         components.setComponentDateOfCreate(new Date());
@@ -72,11 +67,10 @@ public class ComponentController {
             projectServiceImpl.saveProject(project);
         }
 
-        String id = String.valueOf(projectId);
-        return "redirect:/project/list/" + id;
+        return "redirect:/project/list/" + projectId;
     }
 
-    @RequestMapping(value = "/updateComponent")
+    @RequestMapping(value = "/updateComponent", method = RequestMethod.GET)
     public String updateComponent(@RequestParam("componentId") long componentId, @RequestParam("projectId") String projectId, Model model) {
         Components components = componentsServiceImpl.getComponentsById(componentId);
         model.addAttribute("component", components);
@@ -84,7 +78,7 @@ public class ComponentController {
         return "component-page";
     }
 
-    @RequestMapping(value = "/deleteComponent")
+    @RequestMapping(value = "/deleteComponent", method = RequestMethod.GET)
     public String deleteComponent(@RequestParam("componentId") long componentId, @RequestParam("projectId") String projectId) {
         componentsServiceImpl.deleteComponentsById(componentId);
         return "redirect:/project/list/" + projectId;

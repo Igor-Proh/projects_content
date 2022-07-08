@@ -76,19 +76,6 @@ public class Components {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Components components = (Components) o;
-        return componentId == components.componentId && componentQuantity == components.componentQuantity && Objects.equals(componentName, components.componentName) && Objects.equals(componentDescription, components.componentDescription) && Objects.equals(componentDateOfCreate, components.componentDateOfCreate);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(componentId, componentName, componentQuantity, componentDescription, componentDateOfCreate);
-    }
-
-    @Override
     public String toString() {
         return "Component{" +
                 "componentId=" + componentId +

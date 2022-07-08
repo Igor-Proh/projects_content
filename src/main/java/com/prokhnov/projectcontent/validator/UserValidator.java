@@ -12,8 +12,12 @@ import org.springframework.validation.Validator;
 @Component
 public class UserValidator implements Validator {
 
+    private final UserService userService;
+
     @Autowired
-    private  UserService userService;
+    public UserValidator(UserService userService) {
+        this.userService = userService;
+    }
 
     @Override
     public boolean supports(Class<?> clazz) {
@@ -26,6 +30,7 @@ public class UserValidator implements Validator {
 
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "userName", "NotEmpty");
         if (user.getUserName().length() < 6 || user.getUserName().length() > 32) {
+            System.out.println("1");
             errors.rejectValue("userName", "Size.userForm.userName");
         }
         if (userService.findByUserName(user.getUserName()) != null) {

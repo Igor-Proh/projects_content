@@ -4,6 +4,7 @@ import com.prokhnov.projectcontent.dao.ComponentsDAO;
 import com.prokhnov.projectcontent.entity.Components;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
 
 @Service
@@ -30,7 +31,6 @@ public class ComponentsServiceImpl implements ComponentsService {
 
     @Override
     public Components getComponentsById(long id) {
-
         return componentsDAO.getById(id);
     }
 

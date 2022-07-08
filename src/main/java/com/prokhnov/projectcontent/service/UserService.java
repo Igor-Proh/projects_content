@@ -5,11 +5,11 @@ import com.prokhnov.projectcontent.entity.User;
 import java.util.List;
 
 public interface UserService {
-    void saveUser(User user);
-    User findByUserName(String userName);
-    List<User> findAllUsers();
-    User getUserById(long id);
-    void deleteUserById(long id);
+    public void saveUser(User user);
+    public User findByUserName(String userName);
+    public List<User> findAllUsers();
+    public User getUserById(long id);
+    public void deleteUserById(long id);
 
 
 }

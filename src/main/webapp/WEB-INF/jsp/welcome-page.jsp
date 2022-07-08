@@ -18,9 +18,6 @@
     String name = request.getParameter("userName");
 %>
 
-<%!
-    public String myString = "Bob";
-%>
  User with name <%= name %>  was <%= text %>!
 
 

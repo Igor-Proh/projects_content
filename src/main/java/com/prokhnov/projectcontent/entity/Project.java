@@ -7,6 +7,7 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Table(name = "project")
@@ -27,7 +28,6 @@ public class Project {
     @Column(name = "project_date_of_create")
     private Date projectDateOfCreate;
 
-    //    @OneToMany(fetch = FetchType.EAGER, cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST,CascadeType.PERSIST,CascadeType.REFRESH,CascadeType.REMOVE})
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "project_id")
     private List<Components> projectComponent;
@@ -93,5 +93,16 @@ public class Project {
 
     public void setProjectComponent(List<Components> projectComponent) {
         this.projectComponent = projectComponent;
+    }
+
+    @Override
+    public String toString() {
+        return "Project{" +
+                "projectId=" + projectId +
+                ", projectName='" + projectName + '\'' +
+                ", projectDescription='" + projectDescription + '\'' +
+                ", projectDateOfCreate=" + projectDateOfCreate +
+                ", projectComponent=" + projectComponent +
+                '}';
     }
 }

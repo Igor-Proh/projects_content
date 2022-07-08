@@ -22,32 +22,50 @@
 <%--@elvariable id="userForm" type="com"--%>
 
 <form:form action="/user/saveUser"
-           modelAttribute="userForm">
+           modelAttribute="userForm" method="post">
 
 <%--    <p>--%>
 <%--        Name: <input type="text" name="userName"/>--%>
 <%--    </p>--%>
-Name:
+
+<%--    <p>--%>
+<%--        Password: <input type="password" name="userPassword"/>--%>
+<%--    </p>--%>
+<%--    <p>--%>
+<%--        Password: <input type="password" name="userConfirmPassword"/>--%>
+<%--    </p>--%>
+    Name:
+    <br>
     <spring:bind path="userName">
-        <div class="form-group ${status.error ? 'has-error' : ''}">
+
+             ${status.error ? 'has-error' : ''}
             <form:input type="text" path="userName"  placeholder="Username"/>
             <form:errors path="userName"/>
-        </div>
+
     </spring:bind>
 
-    <p>
-        Password: <input type="password" name="userPassword"/>
-    </p>
-    <c:if test="${param.error!=null}">
+    <br>
 
-        <i class="failed">Sorry! You entered invalid username/password.</i>
+    Password:
+    <br>
+    <spring:bind path="userPassword">
+         ${status.error ? 'has-error' : ''}
+            <form:input type="password" path="userPassword"  placeholder="Password"/>
+            <form:errors path="userPassword"/>
 
-    </c:if>
-    <p>
-        Password: <input type="password" name="userConfirmPassword"/>
-    </p>
+    </spring:bind>
 
+    <br>
 
+    Confirm password:
+    <spring:bind path="userConfirmPassword">
+        <div class="form-group ${status.error ? 'has-error' : ''}">
+            <form:input type="password" path="userConfirmPassword"
+                        placeholder="Confirm your password"/>
+            <form:errors path="userConfirmPassword"/>
+        </div>
+    </spring:bind>
+    <br>
 
     <input type="submit" value="Create User"/>
 

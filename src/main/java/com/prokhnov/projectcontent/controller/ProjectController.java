@@ -6,10 +6,7 @@ import com.prokhnov.projectcontent.service.ProjectServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
@@ -26,7 +23,7 @@ public class ProjectController {
         this.projectServiceImpl = projectServiceImpl;
     }
 
-    @RequestMapping({"/list/{id}", "{id}", "/list/sort/{id}"})
+    @RequestMapping(value = {"/list/{id}", "{id}", "/list/sort/{id}"}, method = RequestMethod.GET)
     public String showComponents(Model model, @PathVariable String id) {
         int ids = Integer.parseInt(id);
         List<Components> listOfProjectComponents = projectServiceImpl.getProjectById(ids).getProjectComponent();
@@ -36,14 +33,14 @@ public class ProjectController {
         return "all-project-components-page";
     }
 
-    @RequestMapping(value = "/list")
+    @RequestMapping(value = "/list", method = RequestMethod.GET)
     public String getAllProjects(Model model) {
         List<Project> allProjects = projectServiceImpl.getAllProjects();
         model.addAttribute("projects", allProjects);
         return "all-projects-page";
     }
 
-    @RequestMapping(value = "/addProject")
+    @RequestMapping(value = "/addProject", method = RequestMethod.GET)
     public String addProject(Model model) {
         Project project = new Project();
         project.setProjectDateOfCreate(new Date());
@@ -51,11 +48,12 @@ public class ProjectController {
         return "project-page";
     }
 
-    @RequestMapping(value = "/saveProject")
+    @RequestMapping(value = "/saveProject", method = RequestMethod.POST)
     public String saveProject(@ModelAttribute("project") Project project) {
 
         if (project.getProjectId() != 0) {
-            project.addListOfComponents(projectServiceImpl.getProjectById(project.getProjectId()).getProjectComponent());
+            project.addListOfComponents(projectServiceImpl
+                    .getProjectById(project.getProjectId()).getProjectComponent());
         }
 
         project.setProjectDateOfCreate(new Date());
@@ -63,20 +61,20 @@ public class ProjectController {
         return "redirect:/project/list";
     }
 
-    @RequestMapping(value = "/updateProject")
+    @RequestMapping(value = "/updateProject", method = RequestMethod.GET)
     public String updateProject(@RequestParam("projectId") long projectId, Model model) {
         Project project = projectServiceImpl.getProjectById(projectId);
         model.addAttribute("project", project);
         return "project-page";
     }
 
-    @RequestMapping(value = "/deleteProject")
+    @RequestMapping(value = "/deleteProject", method = RequestMethod.GET)
     public String deleteProject(@RequestParam("projectId") long id) {
         projectServiceImpl.deleteProjectById(id);
         return "redirect:/project/list";
     }
 
-    @RequestMapping(value = "/list/sort")
+    @RequestMapping(value = "/list/sort", method = RequestMethod.GET)
     public String sortList(Model model, HttpServletRequest request) {
         List<Project> sortList = projectServiceImpl.getAllProjectsAndSortBy(request.getParameter("dropdown"));
         model.addAttribute("projects", sortList);

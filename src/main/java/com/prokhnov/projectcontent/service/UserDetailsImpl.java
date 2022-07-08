@@ -16,6 +16,7 @@ import java.util.Set;
 
 
 public class UserDetailsImpl implements UserDetails {
+
     @Autowired
     private User user;
 
