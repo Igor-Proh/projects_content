@@ -1,8 +1,11 @@
 package com.prokhnov.projectcontent.configuration;
 
 import com.prokhnov.projectcontent.service.UserDetailsServiceImpl;
+import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.support.ReloadableResourceBundleMessageSource;
+import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -47,6 +50,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/user/saveUser").permitAll()
                 .antMatchers("/user/welcome").permitAll()
 
+//                add antMatchers for roles
                 .anyRequest().authenticated()
 
                 .and()

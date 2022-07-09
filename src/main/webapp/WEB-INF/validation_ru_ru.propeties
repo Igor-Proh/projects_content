@@ -1,4 +1,4 @@
-NotEmpty.userForm.userName=This field is required.
+NotEmpty=This field is required.
 Size.userForm.userName=Please use between 6 and 32 characters.
 Duplicate.userForm.userName=Someone already has that username.
 Size.userForm.userPassword=Try one with at least 8 characters.

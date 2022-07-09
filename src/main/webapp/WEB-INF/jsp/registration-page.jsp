@@ -7,7 +7,7 @@
     <title>Registration</title>
 
     <style>
-        .failed{
+        .failed {
             color: red;
         }
     </style>
@@ -17,56 +17,41 @@
 <body>
 <h3>Registration Form</h3>
 
-
-
 <%--@elvariable id="userForm" type="com"--%>
+<form:form action="/user/registration"
+           modelAttribute="userForm" >
 
-<form:form action="/user/saveUser"
-           modelAttribute="userForm" method="post">
 
-<%--    <p>--%>
-<%--        Name: <input type="text" name="userName"/>--%>
-<%--    </p>--%>
+    Username(*):
 
-<%--    <p>--%>
-<%--        Password: <input type="password" name="userPassword"/>--%>
-<%--    </p>--%>
-<%--    <p>--%>
-<%--        Password: <input type="password" name="userConfirmPassword"/>--%>
-<%--    </p>--%>
-    Name:
-    <br>
     <spring:bind path="userName">
 
-             ${status.error ? 'has-error' : ''}
-            <form:input type="text" path="userName"  placeholder="Username"/>
-            <form:errors path="userName"/>
-
+        <form:input type="text" path="userName" placeholder="Username"/><br>
+        <i> <form:errors cssClass="failed" path="userName"/></i>
     </spring:bind>
 
     <br>
-
-    Password:
     <br>
+    Password(*):
+
     <spring:bind path="userPassword">
-         ${status.error ? 'has-error' : ''}
-            <form:input type="password" path="userPassword"  placeholder="Password"/>
-            <form:errors path="userPassword"/>
 
+        <form:input type="password" path="userPassword" placeholder="Password"/><br>
+        <i><form:errors cssClass="failed" path="userPassword"/></i>
     </spring:bind>
 
     <br>
-
-    Confirm password:
+    <br>
+    Password(*):
     <spring:bind path="userConfirmPassword">
-        <div class="form-group ${status.error ? 'has-error' : ''}">
-            <form:input type="password" path="userConfirmPassword"
-                        placeholder="Confirm your password"/>
-            <form:errors path="userConfirmPassword"/>
-        </div>
+        <form:input type="password" path="userConfirmPassword"
+                    placeholder="Confirm your password"/><br>
+        <i><form:errors cssClass="failed" path="userConfirmPassword"/></i>
+
+
     </spring:bind>
     <br>
-
+    <br>
     <input type="submit" value="Create User"/>
 
 </form:form>

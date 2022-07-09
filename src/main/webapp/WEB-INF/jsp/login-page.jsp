@@ -19,7 +19,6 @@
 <form:form action="${pageContext.request.contextPath}/authenticateTheUser"
            method="post">
 
-    <!-- Check for login error -->
     <c:if test="${param.error!=null}">
 
         <i class="failed">Sorry! You entered invalid username/password.</i>
@@ -27,17 +26,15 @@
     </c:if>
 
     <p>
-        User name: <input type="text" name="username"/>
+        Username: <input type="text" name="username" placeholder="Username"/>
     </p>
 
     <p>
-        Password: <input type="password" name="password"/>
+        Password:  <input type="password" name="password" placeholder="Password"/>
     </p>
 
 
     <input type="submit" value="Sign in"/>
-<%--    <input type="button" value="Registration"--%>
-<%--           onclick="window.location.href='/user/registration'"/>--%>
     <input type="button" value="Home Page"
            onclick="window.location.href='/'"/>
 

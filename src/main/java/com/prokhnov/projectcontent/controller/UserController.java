@@ -10,7 +10,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.validation.Valid;
 import java.util.HashSet;
 import java.util.List;
 
@@ -40,18 +42,13 @@ public class UserController {
     }
 
     @RequestMapping(value = "/registration", method = RequestMethod.POST)
-    public String userRegistration(@ModelAttribute("userForm") User userForm, BindingResult bindingResult, Model model) {
+    public String userRegistration(@ModelAttribute("userForm") User userForm, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
         userValidator.validate(userForm, bindingResult);
-
-//        if (bindingResult.hasErrors()) {
-//            System.out.println(bindingResult.hasErrors());
-//            return "registration-page";
-//        }
-
-
-        userService.saveUser(userForm);
-        model.addAttribute("userId", userForm.getUserId());
-        return "redirect:/user/welcome";
+        if (bindingResult.hasErrors()) {
+            return "registration-page";
+        }
+        redirectAttributes.addFlashAttribute("user", userForm);
+        return "redirect:/user/saveUser";
     }
 
     @RequestMapping(value = "/welcome", method = RequestMethod.GET)
@@ -80,7 +77,7 @@ public class UserController {
         return "redirect:/user/list";
     }
 
-    @RequestMapping(value = "/saveUser", method = RequestMethod.POST)
+    @RequestMapping(value = "/saveUser")
     public String saveUser(@ModelAttribute("user") User user, Model model) {
 
         if (user.getUserId() != 0) {

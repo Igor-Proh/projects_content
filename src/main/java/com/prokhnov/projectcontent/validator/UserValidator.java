@@ -26,24 +26,35 @@ public class UserValidator implements Validator {
 
     @Override
     public void validate(Object target, Errors errors) {
+
         User user = (User) target;
 
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "userName", "NotEmpty");
-        if (user.getUserName().length() < 6 || user.getUserName().length() > 32) {
-            System.out.println("1");
-            errors.rejectValue("userName", "Size.userForm.userName");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "userName", "NotEmpty", "*This field is required.");
+
+        if (user.getUserName().length() < 3 || user.getUserName().length() > 32) {
+            errors.rejectValue("userName"
+                    , "Size.userForm.userName"
+                    ,"*Please use between 4 and 32 characters.");
         }
+
         if (userService.findByUserName(user.getUserName()) != null) {
-            errors.rejectValue("userName", "Duplicate.userForm.userName");
+            errors.rejectValue("userName"
+                    , "Duplicate.userForm.userName"
+                    ,"*Someone already has that username.");
         }
 
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "userPassword", "NotEmpty");
-        if (user.getUserPassword().length() < 8 || user.getUserPassword().length() > 32) {
-            errors.rejectValue("userPassword", "Size.userForm.userPassword");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "userPassword", "NotEmpty", "*This field is required.");
+        if (user.getUserPassword().length() < 4 || user.getUserPassword().length() > 32) {
+            errors.rejectValue("userPassword"
+                    , "Size.userForm.userPassword"
+                    ,"*Try one with at least 4 characters.");
         }
 
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "userConfirmPassword", "NotEmpty", "*This field is required.");
         if (!user.getUserConfirmPassword().equals(user.getUserPassword())) {
-            errors.rejectValue("userConfirmPassword", "Diff.userForm.userConfirmPassword");
+            errors.rejectValue("userConfirmPassword"
+                    , "Diff.userForm.userConfirmPassword"
+                    ,"*These passwords don't match.");
         }
     }
 }

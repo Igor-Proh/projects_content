@@ -2,7 +2,6 @@ package com.prokhnov.projectcontent.entity;
 
 import javax.persistence.*;
 import java.util.HashSet;
-import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -29,8 +28,8 @@ public class User {
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(name = "user_role",
-            joinColumns = @JoinColumn(name = "user_id",referencedColumnName = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id",referencedColumnName = "role_id"))
+            joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "role_id"))
     private Set<Role> roles = new HashSet<>();
 
     public User() {
@@ -90,7 +89,7 @@ public class User {
         this.userConfirmPassword = userConfirmPassword;
     }
 
-    public void userAddRole(String role){
+    public void userAddRole(String role) {
         roles.add(new Role(role));
     }
 
