@@ -1,6 +1,16 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html>
+<head>
+    <title>Project</title>
+
+    <style>
+        .failed {
+            color: red;
+        }
+    </style>
+
+</head>
 <body>
 <h2>
     Project
@@ -9,13 +19,14 @@
 
 
 <%--@elvariable id="project" type="com"--%>
-<form:form action="saveProject" modelAttribute="project">
+<form:form action="addProject" modelAttribute="project">
 
     <form:hidden path="projectId"/>
 
-    Name: <form:input path="projectName"/>
-    <br><br>
-    Description: <form:input path="projectDescription"/>
+    Project name: <form:input type="text" path="projectName" placeholder = "Enter project name"/><br>
+    <i> <form:errors cssClass="failed" path="projectName"/><br></i>
+    <br>
+    Description: <form:input type = "text" path="projectDescription" placeholder ="Enter description"/>
     <br><br>
 
     <input type="submit" value="Save">

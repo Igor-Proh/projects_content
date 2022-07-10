@@ -6,6 +6,12 @@
 <html>
 <body>
 
+<style>
+    .name {
+        color: midnightblue;
+    }
+</style>
+
 <%
     String s = request.getParameter("userId");
     long parseUserId = Long.parseLong(s);
@@ -18,7 +24,7 @@
     String name = request.getParameter("userName");
 %>
 
- User with name <%= name %>  was <%= text %>!
+<h2>User with name <i style="color: red"><%= name %></i>   was <i style="color: red"><%= text %></i> !</h2>
 
 
 

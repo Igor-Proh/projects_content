@@ -18,6 +18,7 @@
             <th>Name</th>
             <th>Password</th>
             <th>Enabled</th>
+            <th>Roles</th>
             <th>Operations</th>
         </tr>
 <%--        <jsp:useBean id="projects" scope="request" type="java.util.List"/>--%>
@@ -39,6 +40,10 @@
                 <td>${user.userName}</td>
                 <td>${user.userPassword}</td>
                 <td>${user.userEnabled}</td>
+<%--                 <c:forEach var="user" items="${user.roles}">--%>
+<%--                    <td>${user.roles}</td>--%>
+<%--                </c:forEach>--%>
+                <td>${user.listOfRoles}</td>
                 <td>
                     <input type="button" value="Update"
                            onclick="window.location.href='${updateButton}'"/>

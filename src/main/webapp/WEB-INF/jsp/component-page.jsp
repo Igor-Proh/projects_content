@@ -17,11 +17,11 @@
 
     <form:hidden path="componentId"/>
 
-    Name: <form:input path="componentName"/>
+    Name of component: <form:input type="text" placeholder = "Component name" path="componentName"/>
     <br><br>
-    Quantity: <form:input path="componentQuantity"/>
+    Quantity: <form:input type="number" path="componentQuantity"/>
     <br><br>
-    Description: <form:input path="componentDescription"/>
+    Description: <form:input type="text" placeholder = "Component description" path="componentDescription"/>
     <br><br>
 
     <c:url var="backButton" value="/project/list/${projectId}"/>

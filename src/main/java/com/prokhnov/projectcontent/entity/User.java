@@ -26,6 +26,9 @@ public class User {
     @Transient
     private String userConfirmPassword;
 
+    @Transient
+    private String listOfRoles;
+
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(name = "user_role",
             joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "user_id"),
@@ -91,6 +94,12 @@ public class User {
 
     public void userAddRole(String role) {
         roles.add(new Role(role));
+    }
+
+    public String getListOfRoles(){
+
+        return roles.toString();
+
     }
 
 
