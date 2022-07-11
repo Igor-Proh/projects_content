@@ -1,8 +1,8 @@
 package com.prokhnov.projectcontent.service;
 
-import com.prokhnov.projectcontent.dao.ProjectDAO;
-import com.prokhnov.projectcontent.entity.Components;
-import com.prokhnov.projectcontent.entity.Project;
+import com.prokhnov.projectcontent.repository.ProjectRepository;
+import com.prokhnov.projectcontent.model.Components;
+import com.prokhnov.projectcontent.model.Project;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,39 +12,39 @@ import java.util.stream.Collectors;
 
 @Service
 public class ProjectServiceImpl implements ProjectService {
-    private ProjectDAO projectDAO;
+    private ProjectRepository projectRepository;
 
     public ProjectServiceImpl() {
     }
 
     @Autowired
-    public ProjectServiceImpl(ProjectDAO projectDAO) {
-        this.projectDAO = projectDAO;
+    public ProjectServiceImpl(ProjectRepository projectRepository) {
+        this.projectRepository = projectRepository;
     }
 
     @Override
     public List<Project> getAllProjects() {
-        return projectDAO.findAll();
+        return projectRepository.findAll();
     }
 
     @Override
     public void saveProject(Project project) {
-        projectDAO.save(project);
+        projectRepository.save(project);
     }
 
     @Override
     public Project getProjectById(long id) {
-        return projectDAO.getById(id);
+        return projectRepository.getById(id);
     }
 
     @Override
     public void deleteProjectById(long id) {
-        projectDAO.deleteById(id);
+        projectRepository.deleteById(id);
     }
 
     @Override
     public List<Project> getAllProjectsAndSortBy(String sortBy) {
-        List<Project> list = projectDAO.findAll();
+        List<Project> list = projectRepository.findAll();
 
         switch (sortBy) {
             case "id lowest first":
@@ -63,13 +63,14 @@ public class ProjectServiceImpl implements ProjectService {
                 return list.stream().sorted(Comparator.comparing(Project::getProjectDateOfCreate)).collect(Collectors.toList());
             case "date highest first":
                 return list.stream().sorted(Comparator.comparing(Project::getProjectDateOfCreate).reversed()).collect(Collectors.toList());
-            default: return list;
+            default:
+                return list;
         }
     }
 
     @Override
     public List<Components> getAllComponentsAndSortBy(long id, String sortBy) {
-        List<Components> list = projectDAO.getById(id).getProjectComponent();
+        List<Components> list = projectRepository.getById(id).getProjectComponent();
         switch (sortBy) {
             case "name a-z":
                 return list.stream().sorted(Comparator.comparing(Components::getComponentName)).collect(Collectors.toList());
@@ -87,7 +88,13 @@ public class ProjectServiceImpl implements ProjectService {
                 return list.stream().sorted(Comparator.comparing(Components::getComponentDateOfCreate)).collect(Collectors.toList());
             case "date highest first":
                 return list.stream().sorted(Comparator.comparing(Components::getComponentDateOfCreate).reversed()).collect(Collectors.toList());
-            default: return list;
+            default:
+                return list;
         }
+    }
+
+    @Override
+    public Project findProjectByName(String projectName) {
+        return projectRepository.findByProjectName(projectName);
     }
 }

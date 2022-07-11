@@ -1,8 +1,7 @@
 package com.prokhnov.projectcontent.controller;
 
-import com.prokhnov.projectcontent.entity.Components;
-import com.prokhnov.projectcontent.entity.Project;
-import com.prokhnov.projectcontent.entity.User;
+import com.prokhnov.projectcontent.model.Components;
+import com.prokhnov.projectcontent.model.Project;
 import com.prokhnov.projectcontent.service.ProjectServiceImpl;
 import com.prokhnov.projectcontent.validator.ProjectValidator;
 import org.springframework.beans.factory.annotation.Autowired;

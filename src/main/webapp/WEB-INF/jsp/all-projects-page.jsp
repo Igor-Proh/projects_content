@@ -7,26 +7,24 @@
 <html>
 <head>
     <meta charset="UTF-8"/>
-    <title>Projects</title>
+    <title>Projects list</title>
 
 </head>
 <body>
 <h1>Projects List</h1>
 
 <br>
-
-
 <security:authorize access="hasAnyAuthority('ADMIN')">
     <input type="button" value="Add New Project"
            onclick="window.location.href = '/project/addProject'"/>
-
-
     <br>
     <br>
 </security:authorize>
 
 <form:form action="/project/list/sort/" method="get">
+
     <i> Sort By:</i>
+
 <select id="dropdown" name="dropdown">
         <option value="id lowest first">Id L-H</option>
         <option value="id highest first">Id H-L</option>
@@ -37,7 +35,9 @@
         <option value="date lowest first">Date L-H</option>
         <option value="date highest first">Date H-L</option>
 </select>
+
     <input type="submit" value="Sort">
+
 </form:form>
 
 <br>
@@ -56,8 +56,6 @@
 
         <jsp:useBean id="projects" scope="request" type="java.util.List"/>
 
-
-
         <c:forEach var="project" items="${projects}">
 
 
@@ -68,7 +66,6 @@
             <c:url var="deleteButton" value="/project/deleteProject">
                 <c:param name="projectId" value="${project.projectId}"/>
             </c:url>
-
 
             <tr>
                 <td>${project.projectId}</td>
@@ -92,8 +89,5 @@
 <input type="button" value="Back"
        onclick="window.location.href = '/'"/>
 <br>
-
-
 </body>
-
 </html>

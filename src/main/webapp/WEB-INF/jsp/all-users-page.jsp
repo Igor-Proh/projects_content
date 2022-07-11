@@ -3,9 +3,10 @@
 <!DOCTYPE HTML>
 <html>
 <head>
+
     <meta charset="UTF-8"/>
+
     <title>Users List</title>
-    <%--    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/style.css"/>--%>
 </head>
 <body>
 <h1>Users List</h1>
@@ -21,7 +22,6 @@
             <th>Roles</th>
             <th>Operations</th>
         </tr>
-<%--        <jsp:useBean id="projects" scope="request" type="java.util.List"/>--%>
 
         <c:forEach var="user" items="${user}" >
 
@@ -40,9 +40,6 @@
                 <td>${user.userName}</td>
                 <td>${user.userPassword}</td>
                 <td>${user.userEnabled}</td>
-<%--                 <c:forEach var="user" items="${user.roles}">--%>
-<%--                    <td>${user.roles}</td>--%>
-<%--                </c:forEach>--%>
                 <td>${user.listOfRoles}</td>
                 <td>
                     <input type="button" value="Update"
@@ -51,9 +48,11 @@
                            onclick="window.location.href='${deleteButton}'"/>
                 </td>
             </tr>
+
         </c:forEach>
     </table>
 </div>
+
 <br>
 <input type="button" value="Add New User"
        onclick="window.location.href = '/user/registration'"/>

@@ -30,8 +30,7 @@
         <i> <form:errors cssClass="failed" path="userName"/></i>
     </spring:bind>
 
-    <br>
-    <br>
+    <br><br>
     Password(*):
 
     <spring:bind path="userPassword">
@@ -40,18 +39,14 @@
         <i><form:errors cssClass="failed" path="userPassword"/></i>
     </spring:bind>
 
-    <br>
-    <br>
+    <br><br>
     Password(*):
     <spring:bind path="userConfirmPassword">
         <form:input type="password" path="userConfirmPassword"
                     placeholder="Confirm your password"/><br>
         <i><form:errors cssClass="failed" path="userConfirmPassword"/></i>
-
-
     </spring:bind>
-    <br>
-    <br>
+    <br><br>
     <input type="submit" value="Create User"/>
 
 </form:form>

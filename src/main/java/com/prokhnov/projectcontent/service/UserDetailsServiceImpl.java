@@ -1,7 +1,7 @@
 package com.prokhnov.projectcontent.service;
 
-import com.prokhnov.projectcontent.dao.UserDAO;
-import com.prokhnov.projectcontent.entity.User;
+import com.prokhnov.projectcontent.repository.UserRepository;
+import com.prokhnov.projectcontent.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -12,12 +12,12 @@ import org.springframework.stereotype.Service;
 public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Autowired
-    private UserDAO userDAO;
+    private UserRepository userRepository;
 
     @Override
     public UserDetails loadUserByUsername(String username)
             throws UsernameNotFoundException {
-        User user = userDAO.findByUserName(username);
+        User user = userRepository.findByUserName(username);
 
         if (user == null) {
             throw new UsernameNotFoundException("Could not find user");

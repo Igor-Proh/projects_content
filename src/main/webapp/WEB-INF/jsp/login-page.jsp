@@ -14,8 +14,6 @@
 <body>
 <h3>Please Sign In</h3>
 
-
-
 <form:form action="${pageContext.request.contextPath}/authenticateTheUser"
            method="post">
 
@@ -39,8 +37,5 @@
            onclick="window.location.href='/'"/>
 
 </form:form>
-
-
 </body>
-
 </html>

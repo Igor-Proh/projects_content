@@ -1,7 +1,7 @@
 package com.prokhnov.projectcontent.service;
 
-import com.prokhnov.projectcontent.entity.Components;
-import com.prokhnov.projectcontent.entity.Project;
+import com.prokhnov.projectcontent.model.Components;
+import com.prokhnov.projectcontent.model.Project;
 
 import java.util.List;
 
@@ -17,4 +17,6 @@ public interface ProjectService {
     public List<Project> getAllProjectsAndSortBy(String s);
 
     public List<Components> getAllComponentsAndSortBy(long id, String sortBy);
+
+    public Project findProjectByName(String projectName);
 }

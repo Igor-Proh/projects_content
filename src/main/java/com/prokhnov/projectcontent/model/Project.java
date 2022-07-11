@@ -1,4 +1,4 @@
-package com.prokhnov.projectcontent.entity;
+package com.prokhnov.projectcontent.model;
 
 import com.sun.istack.NotNull;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -7,7 +7,6 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Objects;
 
 @Entity
 @Table(name = "project")

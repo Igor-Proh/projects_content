@@ -1,8 +1,7 @@
-package com.prokhnov.projectcontent.entity;
+package com.prokhnov.projectcontent.model;
 
 import javax.persistence.*;
 import java.util.HashSet;
-import java.util.Objects;
 import java.util.Set;
 
 @Entity

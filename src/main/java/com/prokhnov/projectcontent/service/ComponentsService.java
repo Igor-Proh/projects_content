@@ -1,6 +1,6 @@
 package com.prokhnov.projectcontent.service;
 
-import com.prokhnov.projectcontent.entity.Components;
+import com.prokhnov.projectcontent.model.Components;
 
 import java.util.List;
 

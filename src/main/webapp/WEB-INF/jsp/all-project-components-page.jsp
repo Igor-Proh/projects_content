@@ -6,6 +6,10 @@
 <html>
 <head>
 
+    <title>
+        Components List
+    </title>
+
     <meta charset="UTF-8"/>
     <title>Components</title>
 
@@ -20,10 +24,14 @@
 
 <input type="button" value="Add New Component"
        onclick="window.location.href = '${addButton}'"/>
-<br><br>
+
+<br>
+<br>
 
 <form:form action="${pageContext.request.contextPath}/components/sort/${id}" method="get">
+
     <i> Sort By:</i>
+
     <select id="dropdown" name="dropdown">
         <option value="name a-z">Name A-Z</option>
         <option value="name z-a">Name Z-A</option>
@@ -70,7 +78,6 @@
                 <td>${component.componentDescription}</td>
                 <td><fmt:formatDate value="${component.componentDateOfCreate}" pattern="yyyy.MM.dd" /></td>
                 <td>
-
                     <input type="button" value="Update"
                            onclick="window.location.href='${updateButton}'" />
                     <input type="button" value="Delete"
@@ -78,11 +85,10 @@
                 </td>
             </tr>
         </c:forEach>
-
     </table>
 </div>
-<br>
 
+<br>
 <input type="button" value="Back"
        onclick="window.location.href = '${pageContext.request.contextPath}/project/list'"/>
 <br>

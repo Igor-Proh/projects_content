@@ -1,8 +1,8 @@
 package com.prokhnov.projectcontent.controller;
 
-import com.prokhnov.projectcontent.dao.RoleDAO;
-import com.prokhnov.projectcontent.entity.Role;
-import com.prokhnov.projectcontent.entity.User;
+import com.prokhnov.projectcontent.repository.RoleRepository;
+import com.prokhnov.projectcontent.model.Role;
+import com.prokhnov.projectcontent.model.User;
 import com.prokhnov.projectcontent.service.UserService;
 import com.prokhnov.projectcontent.validator.UserValidator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +12,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import javax.validation.Valid;
 import java.util.HashSet;
 import java.util.List;
 
@@ -23,14 +22,14 @@ public class UserController {
     private final UserService userService;
     private final UserService userServiceImpl;
     private final UserValidator userValidator;
-    private final RoleDAO roleDAO;
+    private final RoleRepository roleRepository;
 
     @Autowired
-    public UserController(UserService userService, UserService userServiceImpl, UserValidator userValidator, RoleDAO roleDAO) {
+    public UserController(UserService userService, UserService userServiceImpl, UserValidator userValidator, RoleRepository roleRepository) {
         this.userService = userService;
         this.userServiceImpl = userServiceImpl;
         this.userValidator = userValidator;
-        this.roleDAO = roleDAO;
+        this.roleRepository = roleRepository;
     }
 
 
@@ -83,7 +82,7 @@ public class UserController {
         if (user.getUserId() != 0) {
             user.setRoles(userService.getUserById(user.getUserId()).getRoles());
         } else {
-            List<Role> roles = roleDAO.findAll();
+            List<Role> roles = roleRepository.findAll();
             for (Role role : roles) {
                 if (role.getRoleName().equals("USER")) {
                     user.getRoles().add(role);
