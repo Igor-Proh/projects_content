@@ -47,9 +47,6 @@ insert into components(component_name,component_quantity, component_description,
 insert into components(component_name,component_quantity, component_description, project_id, component_date_of_create) values ('Roller Conveyour', 3,'c2',5,'2020-10-16');
 insert into components(component_name,component_quantity, component_description, project_id, component_date_of_create) values ('Vertical Conveyour', 10,'c3',5,'2020-10-17');
 
-
-
-
 create table user (
 user_id int auto_increment not null primary key ,
 user_name varchar(255),
@@ -71,7 +68,6 @@ foreign key(role_id) references role(role_id)
 
 insert into user(user_name, user_password, user_enabled) value ('admin', '$2a$12$4ZLf1JY92M8a7Ux8LZAL6.sYXZxyq/eqfcU.r.EPzqmtsx6PpKUhW', '1');
 insert into user(user_name, user_password, user_enabled) value ('user', '$2a$12$LajnAaMzaE9JBkgC8Gkx/ebrJ1A8NI4pIhaw02Tsq9OrJeL/2qp4u', '1');
-
 
 insert into role(role_name) value('ADMIN');
 insert into role(role_name) value('USER');
